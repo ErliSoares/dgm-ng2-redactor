@@ -1,0 +1,6 @@
+.container
+	h1 WYSIWYG made easy
+
+	form.form(*ngIf="form", [formGroup]="form")
+		.form-group
+			div(redactor, formControlName="text")
