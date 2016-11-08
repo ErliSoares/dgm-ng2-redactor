@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require(""), require("@angular/core"), require("@angular/forms"), require("jquery"));
+		module.exports = factory(require("@angular/core"), require("@angular/forms"), require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define(["", "@angular/core", "@angular/forms", "jquery"], factory);
+		define(["@angular/core", "@angular/forms", "jquery"], factory);
 	else if(typeof exports === 'object')
-		exports["dgm-ng2-redactor"] = factory(require(""), require("@angular/core"), require("@angular/forms"), require("jquery"));
+		exports["dgm-ng2-redactor"] = factory(require("@angular/core"), require("@angular/forms"), require("jquery"));
 	else
-		root["dgm-ng2-redactor"] = factory(root[""], root["@angular/core"], root["@angular/forms"], root["jquery"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
+		root["dgm-ng2-redactor"] = factory(root["@angular/core"], root["@angular/forms"], root["jquery"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -71,7 +71,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -82,18 +82,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var core_1 = __webpack_require__(1);
-var redactor_component_1 = __webpack_require__(4);
+var core_1 = __webpack_require__(0);
+var redactor_component_1 = __webpack_require__(3);
 var RedactorModule = (function () {
     function RedactorModule() {
     }
@@ -114,23 +108,21 @@ exports.RedactorModule = RedactorModule;
 
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 module.exports = "<textarea #content></textarea>";
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 /// <reference path="./index.d.ts" />
-var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(5);
-__webpack_require__(0);
-__webpack_require__(0);
-var $ = __webpack_require__(6);
+var core_1 = __webpack_require__(0);
+var forms_1 = __webpack_require__(4);
+var $ = __webpack_require__(5);
 var RedactorValueAccessor = {
     provide: forms_1.NG_VALUE_ACCESSOR,
     useExisting: core_1.forwardRef(function () { return Redactor; }),
@@ -187,7 +179,7 @@ var Redactor = (function () {
         core_1.Component({
             selector: '[redactor]',
             providers: [RedactorValueAccessor],
-            template: __webpack_require__(3),
+            template: __webpack_require__(2),
             encapsulation: core_1.ViewEncapsulation.None,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
@@ -198,6 +190,12 @@ exports.Redactor = Redactor;
 
 
 /***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ },
 /* 5 */
 /***/ function(module, exports) {
 
@@ -205,17 +203,11 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
-
-/***/ },
-/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var redactor_module_1 = __webpack_require__(2);
+var redactor_module_1 = __webpack_require__(1);
 exports.RedactorModule = redactor_module_1.RedactorModule;
 
 

@@ -9,8 +9,6 @@ import {
 	Input,
 } from '@angular/core'
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
-import 'imports?jQuery=jquery!redactorLib'
-import 'imports?jQuery=jquery!redactorSource'
 import * as $ from 'jquery'
 
 const RedactorValueAccessor = {

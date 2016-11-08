@@ -1,8 +1,6 @@
 /// <reference path="index.d.ts" />
 import { ElementRef, Renderer } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import 'imports?jQuery=jquery!redactorLib';
-import 'imports?jQuery=jquery!redactorSource';
 export declare class Redactor implements ControlValueAccessor {
     private host;
     private renderer;
