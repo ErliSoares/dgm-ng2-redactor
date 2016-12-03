@@ -10,4 +10,7 @@ Use as an form input.
 	<div redactor formControlName="content"></div>
 </form>
 ```
+
+This component has `redactorOptions` property contain all redactor settings as described on redactor's doc.
+
 See `example` folder.

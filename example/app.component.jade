@@ -3,4 +3,4 @@
 
 	form.form(*ngIf="form", [formGroup]="form")
 		.form-group
-			div(redactor, formControlName="text")
+			div(redactor, formControlName="text", [redactorOptions]="redactorOptions")

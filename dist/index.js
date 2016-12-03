@@ -144,15 +144,19 @@ var Redactor = (function () {
         var plugins = [
             this.enableSource ? 'source' : undefined,
         ].filter(function (it) { return !!it; });
-        $(elem).redactor({
+        var config = {
             plugins: plugins,
             minHeight: +this.minHeight,
+        };
+        var callbacks = {
             callbacks: {
                 change: function redactorOnChange() {
                     _onChange(this.code.get());
                 },
             },
-        });
+        };
+        config = Object.assign(config, this.redactorOptions, callbacks);
+        $(elem).redactor(config);
     };
     Redactor.prototype.writeValue = function (value) {
         this._value = value;
@@ -171,6 +175,10 @@ var Redactor = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], Redactor.prototype, "enableSource", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Redactor.prototype, "redactorOptions", void 0);
     __decorate([
         core_1.ViewChild('content'), 
         __metadata('design:type', core_1.ElementRef)

@@ -10,6 +10,7 @@ import {
 } from '@angular/core'
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
 import * as $ from 'jquery'
+import { RedactorConfig } from './config'
 
 const RedactorValueAccessor = {
 	provide: NG_VALUE_ACCESSOR,
@@ -26,6 +27,7 @@ const RedactorValueAccessor = {
 export class Redactor implements ControlValueAccessor {
 	@Input() minHeight: number
 	@Input() enableSource = true
+	@Input() redactorOptions: RedactorConfig
 	private _onChange: Function
 	private _onTouched: Function
 	@ViewChild('content')
@@ -49,15 +51,27 @@ export class Redactor implements ControlValueAccessor {
 		const plugins = [
 			this.enableSource ? 'source' : undefined,
 		].filter(it => !!it)
-		$(elem).redactor({
+
+		let config = {
 			plugins,
 			minHeight: +this.minHeight,
+		}
+
+		let callbacks = {
 			callbacks: {
 				change: function redactorOnChange() {
 					_onChange(this.code.get())
 				},
 			},
-		})
+		}
+
+		config = Object.assign(
+			config,
+			this.redactorOptions,
+			callbacks,
+		)
+
+		$(elem).redactor(config)
 	}
 
 	writeValue(value) {
