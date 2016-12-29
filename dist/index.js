@@ -190,10 +190,7 @@ var Redactor = (function () {
         this._value = value;
     };
     Redactor.prototype.registerOnChange = function (fn) {
-        this._onChange = function (vl) {
-            console.log(vl);
-            return fn(vl);
-        };
+        this._onChange = fn;
     };
     Redactor.prototype.registerOnTouched = function (fn) {
         this._onTouched = fn;
