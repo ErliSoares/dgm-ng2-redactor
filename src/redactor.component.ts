@@ -87,10 +87,7 @@ export class Redactor implements ControlValueAccessor {
 	}
 
 	registerOnChange(fn) {
-		this._onChange = (vl) => {
-			console.log(vl)
-			return fn(vl)
-		}
+		this._onChange = fn
 	}
 
 	registerOnTouched(fn) {
