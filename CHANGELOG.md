@@ -1,3 +1,13 @@
+<a name="0.0.4"></a>
+## 0.0.4 (2016-12-29)
+
+
+### Bug Fixes
+
+* clear log ([501ef3b](https://github.com/mahpah/dgm-ng2-redactor/commit/501ef3b))
+
+
+
 <a name="0.0.3"></a>
 ## 0.0.3 (2016-12-29)
 
