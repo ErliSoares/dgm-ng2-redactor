@@ -11,7 +11,7 @@ import { RedactorConfig } from '../src';
 export class AppComponent {
 	redactorOptions: RedactorConfig = {
 		buttonsHide: ['bold', 'format'],
-		minHeight: 300,
+		minHeight: 200,
 	}
 	private form: FormGroup
 

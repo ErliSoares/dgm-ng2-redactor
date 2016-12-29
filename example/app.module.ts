@@ -8,7 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms'
 	imports: [
 		BrowserModule,
 		ReactiveFormsModule,
-		RedactorModule,
+		RedactorModule.forRoot({
+			minHeight: 500,
+		}),
 	],
 
 	declarations: [

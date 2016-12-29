@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core'
+import { NgModule, ModuleWithProviders } from '@angular/core'
 import { Redactor } from './redactor.component'
+import { RedactorConfig } from './config'
+import { RedactorGlobalConfig } from './redactor-global-config.class'
 
 @NgModule({
 	declarations: [
@@ -10,4 +12,13 @@ import { Redactor } from './redactor.component'
 		Redactor,
 	],
 })
-export class RedactorModule {}
+export class RedactorModule {
+	static forRoot(config: RedactorConfig = {}): ModuleWithProviders {
+		return {
+			ngModule: RedactorModule,
+			providers: [
+				{provide: RedactorGlobalConfig, useValue: config},
+			]
+		}
+	}
+}

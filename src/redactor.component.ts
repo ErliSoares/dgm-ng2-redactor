@@ -7,10 +7,12 @@ import {
 	Renderer,
 	ViewEncapsulation,
 	Input,
+	Optional,
 } from '@angular/core'
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
 import * as $ from 'jquery'
 import { RedactorConfig } from './config'
+import { RedactorGlobalConfig } from './redactor-global-config.class'
 
 const RedactorValueAccessor = {
 	provide: NG_VALUE_ACCESSOR,
@@ -36,7 +38,8 @@ export class Redactor implements ControlValueAccessor {
 
 	constructor(
 		private host: ElementRef,
-		private renderer: Renderer
+		private renderer: Renderer,
+		@Optional() private globalConfig: RedactorGlobalConfig,
 	) {}
 
 	ngAfterViewInit() {
@@ -54,7 +57,10 @@ export class Redactor implements ControlValueAccessor {
 
 		let config = {
 			plugins,
-			minHeight: +this.minHeight,
+		} as any
+
+		if (this.minHeight) {
+			config.minHeight = +this.minHeight
 		}
 
 		let callbacks = {
@@ -66,6 +72,8 @@ export class Redactor implements ControlValueAccessor {
 		}
 
 		config = Object.assign(
+			{},
+			this.globalConfig,
 			config,
 			this.redactorOptions,
 			callbacks,
@@ -79,7 +87,10 @@ export class Redactor implements ControlValueAccessor {
 	}
 
 	registerOnChange(fn) {
-		this._onChange = fn
+		this._onChange = (vl) => {
+			console.log(vl)
+			return fn(vl)
+		}
 	}
 
 	registerOnTouched(fn) {
