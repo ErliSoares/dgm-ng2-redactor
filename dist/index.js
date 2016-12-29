@@ -7,7 +7,7 @@
 		exports["dgm-ng2-redactor"] = factory(require("@angular/core"), require("@angular/forms"), require("jquery"));
 	else
 		root["dgm-ng2-redactor"] = factory(root["@angular/core"], root["@angular/forms"], root["jquery"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -71,26 +71,50 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
+"use strict";
+"use strict";
+var RedactorGlobalConfig = (function () {
+    function RedactorGlobalConfig() {
+    }
+    return RedactorGlobalConfig;
+}());
+exports.RedactorGlobalConfig = RedactorGlobalConfig;
+
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var core_1 = __webpack_require__(0);
-var redactor_component_1 = __webpack_require__(3);
+var core_1 = __webpack_require__(1);
+var redactor_component_1 = __webpack_require__(4);
+var redactor_global_config_class_1 = __webpack_require__(0);
 var RedactorModule = (function () {
     function RedactorModule() {
     }
+    RedactorModule.forRoot = function (config) {
+        if (config === void 0) { config = {}; }
+        return {
+            ngModule: RedactorModule,
+            providers: [
+                { provide: redactor_global_config_class_1.RedactorGlobalConfig, useValue: config },
+            ]
+        };
+    };
     RedactorModule = __decorate([
         core_1.NgModule({
             declarations: [
@@ -108,30 +132,32 @@ exports.RedactorModule = RedactorModule;
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 module.exports = "<textarea #content></textarea>";
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 /// <reference path="./index.d.ts" />
-var core_1 = __webpack_require__(0);
-var forms_1 = __webpack_require__(4);
-var $ = __webpack_require__(5);
+var core_1 = __webpack_require__(1);
+var forms_1 = __webpack_require__(5);
+var $ = __webpack_require__(6);
+var redactor_global_config_class_1 = __webpack_require__(0);
 var RedactorValueAccessor = {
     provide: forms_1.NG_VALUE_ACCESSOR,
     useExisting: core_1.forwardRef(function () { return Redactor; }),
     multi: true,
 };
 var Redactor = (function () {
-    function Redactor(host, renderer) {
+    function Redactor(host, renderer, globalConfig) {
         this.host = host;
         this.renderer = renderer;
+        this.globalConfig = globalConfig;
         this.enableSource = true;
     }
     Redactor.prototype.ngAfterViewInit = function () {
@@ -146,8 +172,10 @@ var Redactor = (function () {
         ].filter(function (it) { return !!it; });
         var config = {
             plugins: plugins,
-            minHeight: +this.minHeight,
         };
+        if (this.minHeight) {
+            config.minHeight = +this.minHeight;
+        }
         var callbacks = {
             callbacks: {
                 change: function redactorOnChange() {
@@ -155,14 +183,17 @@ var Redactor = (function () {
                 },
             },
         };
-        config = Object.assign(config, this.redactorOptions, callbacks);
+        config = Object.assign({}, this.globalConfig, config, this.redactorOptions, callbacks);
         $(elem).redactor(config);
     };
     Redactor.prototype.writeValue = function (value) {
         this._value = value;
     };
     Redactor.prototype.registerOnChange = function (fn) {
-        this._onChange = fn;
+        this._onChange = function (vl) {
+            console.log(vl);
+            return fn(vl);
+        };
     };
     Redactor.prototype.registerOnTouched = function (fn) {
         this._onTouched = fn;
@@ -187,21 +218,16 @@ var Redactor = (function () {
         core_1.Component({
             selector: '[redactor]',
             providers: [RedactorValueAccessor],
-            template: __webpack_require__(2),
+            template: __webpack_require__(3),
             encapsulation: core_1.ViewEncapsulation.None,
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
+        }),
+        __param(2, core_1.Optional()), 
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, redactor_global_config_class_1.RedactorGlobalConfig])
     ], Redactor);
     return Redactor;
 }());
 exports.Redactor = Redactor;
 
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ },
 /* 5 */
@@ -211,11 +237,17 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var redactor_module_1 = __webpack_require__(1);
+var redactor_module_1 = __webpack_require__(2);
 exports.RedactorModule = redactor_module_1.RedactorModule;
 
 
