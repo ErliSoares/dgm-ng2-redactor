@@ -1,6 +1,6 @@
 {
   "name": "@mahpah/angular-redactor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular 2 wrapper for redactor wysiwyg editor",
   "main": "dist/index.js",
   "module": "dist/index.js",
