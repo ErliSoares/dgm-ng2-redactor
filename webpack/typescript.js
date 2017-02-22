@@ -3,8 +3,8 @@ module.exports = () => ({
 		loaders: [{
 			test: /\.ts$/,
 			loaders: [
-				'ts',
-				'angular2-template',
+				'ts-loader',
+				'angular2-template-loader',
 			],
 			exclude: /node_modules/,
 		}],

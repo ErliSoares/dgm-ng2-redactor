@@ -3,8 +3,8 @@ module.exports = (root) => ({
 		loaders: [{
 			test: /\.jade/,
 			loaders: [
-				`html?root=${root}`,
-				`pug-html?${JSON.stringify({ doctype: 'html' })}`,
+				`html-loader?root=${root}`,
+				`pug-html-loader?${JSON.stringify({ doctype: 'html' })}`,
 			],
 		}],
 	},

@@ -21,10 +21,20 @@ export class AppComponent {
 
 	ngOnInit() {
 		this.form = this.formBuilder.group({
-			text: [],
+			text: [ '<p>This paragraph</p>' ],
 		})
 	}
 
 	ngOnDestroy() {
+	}
+
+	changeContent() {
+		this.form.patchValue({
+			text: '<h1>Now header</h1>'
+		})
+	}
+
+	clear() {
+		this.form.patchValue({text: undefined})
 	}
 }

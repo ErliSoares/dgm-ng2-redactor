@@ -1,5 +1,5 @@
-import 'imports?jQuery=jquery!redactorLib'
-import 'imports?jQuery=jquery!redactorSource'
+import 'imports-loader?jQuery=jquery!redactorLib'
+import 'imports-loader?jQuery=jquery!redactorSource'
 import '../libs/redactor/redactor.css'
 import 'core-js/es7/reflect'
 import 'zone.js/dist/zone'

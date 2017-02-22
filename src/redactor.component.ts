@@ -1,10 +1,8 @@
-/// <reference path="./index.d.ts" />
 import {
 	Component,
 	forwardRef,
 	ElementRef,
 	ViewChild,
-	Renderer,
 	ViewEncapsulation,
 	Input,
 	Optional,
@@ -32,24 +30,18 @@ export class Redactor implements ControlValueAccessor {
 	@Input() redactorOptions: RedactorConfig
 	private _onChange: Function
 	private _onTouched: Function
-	@ViewChild('content')
-	private content: ElementRef
-	private _value
+	@ViewChild('content') private content: ElementRef
 
 	constructor(
-		private host: ElementRef,
-		private renderer: Renderer,
 		@Optional() private globalConfig: RedactorGlobalConfig,
 	) {}
 
-	ngAfterViewInit() {
+	ngOnInit() {
 		if (!this.content) {
 			throw 'Redactor: No content child'
 		}
 
 		let elem = this.content.nativeElement as HTMLTextAreaElement
-		elem.value = this._value
-		const { _onChange } = this
 
 		const plugins = [
 			this.enableSource ? 'source' : undefined,
@@ -63,27 +55,31 @@ export class Redactor implements ControlValueAccessor {
 			config.minHeight = +this.minHeight
 		}
 
-		let callbacks = {
-			callbacks: {
-				change: function redactorOnChange() {
-					_onChange(this.code.get())
-				},
-			},
-		}
-
 		config = Object.assign(
 			{},
 			this.globalConfig,
 			config,
 			this.redactorOptions,
-			callbacks,
 		)
 
 		$(elem).redactor(config)
 	}
 
+	ngAfterViewInit() {
+		let elem = this.content.nativeElement
+		if (typeof this._onChange === 'function') {
+			let cb = this._onChange
+			$(elem).on({
+				'change.callback.redactor': function() {
+					cb(this.code.get())
+				}
+			})
+		}
+	}
+
 	writeValue(value) {
-		this._value = value
+		let elem = this.content.nativeElement
+		$(elem).redactor('code.set', value)
 	}
 
 	registerOnChange(fn) {

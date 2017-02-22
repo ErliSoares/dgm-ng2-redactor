@@ -4,3 +4,7 @@
 	form.form(*ngIf="form", [formGroup]="form")
 		.form-group
 			div(redactor, formControlName="text", [redactorOptions]="redactorOptions")
+
+	button.btn.btn-default((click)="changeContent()") Change
+	button.btn.btn-default((click)="clear()") Clear
+	div {{ form?.value | json }}

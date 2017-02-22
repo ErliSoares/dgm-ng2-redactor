@@ -23,26 +23,26 @@ let externals = Object.keys(pkg.dependencies)
 	)
 /* eslint-enable */
 externals = Object.assign(externals, {
-	'imports?jQuery=jquery!redactorLib': '',
-	'imports?jQuery=jquery!redactorSource': '',
+	'imports-loader?jQuery=jquery!redactorLib': '',
+	'imports-loader?jQuery=jquery!redactorSource': '',
 })
 
 const loaders = [{
 	test: /\.ts$/,
 	loaders: [
-		'ts',
-		'angular2-template',
+		'ts-loader',
+		'angular2-template-loader',
 	],
 	exclude: /node_modules/,
 }, {
 	test: /\.jade/,
 	loaders: [
-		`html?root=${root}`,
-		`pug-html?${JSON.stringify({ doctype: 'html' })}`,
+		`html-loader?root=${root}`,
+		`pug-html-loader?${JSON.stringify({ doctype: 'html' })}`,
 	],
 }, {
 	test: /\.scss/,
-	loaders: ['css-to-string', 'css?-minimize', 'resolve-url', 'sass?sourceMaps'],
+	loaders: ['css-to-string-loader', 'css-loader?-minimize', 'resolve-url-loader', 'sass-loader?sourceMaps'],
 }]
 
 const plugins = [

@@ -11,6 +11,8 @@
 		"noEmitOnError": false,
 		"allowSyntheticDefaultImports": true,
 		"strictNullChecks": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"lib": ["es6", "dom"],
 		"baseUrl": "./src",
 		"types": [

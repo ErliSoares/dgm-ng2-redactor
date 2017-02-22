@@ -6,17 +6,17 @@ module.exports = (externalStyle) => ({
 		loaders: removeEmpty([
 			{
 				test: /\.scss/,
-				loaders: ['css-to-string', 'css?-minimize', 'resolve-url', 'sass?sourceMaps'],
+				loaders: ['css-to-string-loader', 'css-loader?-minimize', 'resolve-url-loader', 'sass-loader?sourceMaps'],
 				exclude: externalStyle,
 			},
 			!!externalStyle ? {
 				test: /\.scss/,
-				loader: ExtractTextPlugin.extract(['css', 'resolve-url', 'sass?sourceMap']),
+				loader: ExtractTextPlugin.extract(['css-loader', 'resolve-url-loader', 'sass-loader?sourceMap']),
 				include: externalStyle,
 			} : undefined,
 			{
 				test: /\.css/,
-				loader: ExtractTextPlugin.extract(['css', 'resolve-url']),
+				loader: ExtractTextPlugin.extract(['css-loader', 'resolve-url-loader']),
 				include: externalStyle,
 			},
 		]),
